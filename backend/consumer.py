@@ -4,9 +4,16 @@ import threading
 import requests
 from fastapi import FastAPI
 import time
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "http://localhost:3000"], 
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 weather_results = {}
 
 API_KEY = "b3aa7743d0c913602cc58b3c2feb4b21" 
@@ -30,7 +37,7 @@ def consume_messages():
         data = json.loads(body)
         city = data.get("city")
         print(f"\n[x] Received request for {city}, fetching REAL weather...")
-        time.sleep(3)
+        time.sleep(7)
         try:
             complete_url = f"{BASE_URL}?q={city}&appid={API_KEY}&units=metric"
             
