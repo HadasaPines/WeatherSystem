@@ -1,0 +1,133 @@
+body {
+  background-color: #f4efe6; 
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 254, 254, 0.949) 10px, 
+    rgba(0, 0, 0, 0.03) 12px  
+  );
+  margin: 0;
+  padding: 40px 20px;
+}
+
+.dashboard-container {
+  max-width: 1250px; 
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  direction: rtl; 
+  color: #1a1a1a;
+}
+
+h1, h2, h3 {
+  font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+  color: #111;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 50px;
+  font-size: 3rem; 
+}
+
+.panels-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.panel {
+  flex: 1;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04); 
+}
+
+.input-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+input {
+  flex: 1;
+  padding: 12px 20px;
+  border: 1px solid #e0dcd3;
+  border-radius: 30px; 
+  background-color: #faf8f5; 
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #bc955c; 
+}
+
+button {
+  padding: 8px 45px; 
+  background-color: #bc955c; 
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 30px; 
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+button:hover {
+  background-color: #a6804a; 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 12px rgba(188, 149, 92, 0.3);
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #faf8f5;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
+}
+
+.icon.processing {
+  animation: spin 2s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  color: #c94c4c;
+  background: #fdf3f2;
+  padding: 15px;
+  border-radius: 12px;
+  border-right: 4px solid #c94c4c;
+}
+
+.success-result {
+  background: #f6fbf2;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #d8e8c8;
+}
+
+.input-error-msg {
+  color: #c94c4c;
+  background-color: #fdf3f2;
+  padding: 8px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  border: 1px solid #f2dede;
+  display: inline-block;
+}
