@@ -1,65 +1,100 @@
+/* הגדרת הרקע הכללי של כל העמוד כולל הפסים האלכסוניים */
+body {
+  background-color: #f4efe6; /* צבע הבסיס (שמנת) */
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 254, 254, 0.949) 10px, /* צבע הפס עצמו - שקוף מאוד */
+    rgba(0, 0, 0, 0.03) 12px  /* עובי הפס (2 פיקסלים במקרה הזה) */
+  );
+  margin: 0;
+  padding: 40px 20px;
+}
 
 .dashboard-container {
-  min-width: 900px;
+  max-width: 1100px; /* <--- שונה מ-900 ל-1100 כדי להרחיב את הכרטיסים */
   margin: 0 auto;
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   direction: rtl; 
+  color: #1a1a1a;
+}
+
+/* כותרות מקבלות פונט סריפי קלאסי כמו בתמונה */
+h1, h2, h3 {
+  font-family: 'Playfair Display', 'Times New Roman', Times, serif;
+  color: #111;
 }
 
 h1 {
   text-align: center;
-  color: #333;
   margin-bottom: 50px;
+  font-size: 3rem; 
 }
 
 .panels-container {
   display: flex;
-  gap: 20px;
+  gap: 30px;
   margin-top: 30px;
 }
 
 .panel {
   flex: 1;
-  background: #f9f9f9;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 16px; 
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04); 
 }
 
 .input-group {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin-bottom: 20px;
 }
 
 input {
   flex: 1;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 12px 20px;
+  border: 1px solid #e0dcd3;
+  border-radius: 30px; 
+  background-color: #faf8f5; 
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: #bc955c; 
 }
 
 button {
-  padding: 10px 15px;
-  background-color: #007bff;
+  padding: 8px 45px; /* <--- למעלה/למטה צר יותר (8), בצדדים ארוך יותר (45) */
+  background-color: #bc955c; 
   color: white;
+  font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 30px; 
   cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background-color: #a6804a; 
+  transform: translateY(-2px); 
+  box-shadow: 0 4px 12px rgba(188, 149, 92, 0.3);
 }
 
 .status-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
-  background: white;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 5px;
+  padding: 15px 20px;
+  background: #faf8f5;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #eee;
 }
 
 .icon.processing {
@@ -73,25 +108,28 @@ button:hover {
 }
 
 .error {
-  color: red;
-  background: #ffe6e6;
-  padding: 10px;
-  border-radius: 4px;
+  color: #c94c4c;
+  background: #fdf3f2;
+  padding: 15px;
+  border-radius: 12px;
+  border-right: 4px solid #c94c4c;
 }
 
 .success-result {
-  background: #e6ffe6;
-  padding: 15px;
-  border-radius: 4px;
-  border: 1px solid #b3ffb3;
+  background: #f6fbf2;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #d8e8c8;
 }
+
 .input-error-msg {
-  color: #d9534f;
-  background-color: #f2dede;
-  padding: 8px 12px;
-  border-radius: 4px;
+  color: #c94c4c;
+  background-color: #fdf3f2;
+  padding: 8px 15px;
+  border-radius: 20px;
   font-size: 0.9rem;
   margin-top: -10px;
   margin-bottom: 15px;
-  border: 1px solid #ebccd1;
+  border: 1px solid #f2dede;
+  display: inline-block;
 }

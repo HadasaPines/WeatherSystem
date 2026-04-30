@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 import pika
 import json
-import requests # הוספנו את זה כדי לבדוק מול שרת מזג האוויר
+import requests 
 
 app = FastAPI()
 
