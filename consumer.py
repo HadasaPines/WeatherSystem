@@ -13,7 +13,16 @@ API_KEY = "b3aa7743d0c913602cc58b3c2feb4b21"
 BASE_URL = "http://api.openweathermap.org/data/2.5/weather"
 
 def consume_messages():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    connection = None
+    while True:
+        try:
+            connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
+            print("\n[+] Successfully connected to RabbitMQ!")
+            break  
+        except pika.exceptions.AMQPConnectionError:
+            print("\n[!] RabbitMQ is not ready yet, waiting 3 seconds...")
+            time.sleep(3) 
+
     channel = connection.channel()
     channel.queue_declare(queue='weather_queue')
 
