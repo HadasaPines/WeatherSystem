@@ -1,32 +1,29 @@
 from fastapi import FastAPI
+from pydantic import BaseModel, Field
 import pika
 import json
 
 app = FastAPI()
 
-@app.post("/weather/request")
-def request_weather(data: dict):
-    city = data.get("city")
-    if not city:
-        return {"error": "City is required"}
+class WeatherRequest(BaseModel):
+    city: str = Field(..., example="City name, e.g. Tel Aviv")
 
-    # 1. התחברות לשרת ה-RabbitMQ שלנו שרץ בדוקר
-    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+@app.post("/weather/request")
+def request_weather(request: WeatherRequest):
+    city_name = request.city
+
+    connection = pika.BlockingConnection(pika.ConnectionParameters('rabbitmq'))
     channel = connection.channel()
 
-    # 2. מוודאים שהתור קיים (אם לא, הוא ייווצר אוטומטית)
     channel.queue_declare(queue='weather_queue')
 
-    # 3. אריזת הנתונים לפורמט טקסטואלי (JSON) ושליחתם לתור
-    message = json.dumps({"city": city})
+    message = json.dumps({"city": city_name})
     channel.basic_publish(
         exchange='',
-        routing_key='weather_queue', # שם התור אליו אנחנו שולחים את ההודעה
+        routing_key='weather_queue',
         body=message
     )
 
-    # 4. סגירת החיבור ל-RabbitMQ בצורה מסודרת
     connection.close()
 
-    # 5. החזרת תשובה מיידית למשתמש, מבלי לחכות לעיבוד
-    return {"status": "Request accepted, processing in background", "city": city}
+    return {"status": "Request accepted, processing in background", "city": city_name}

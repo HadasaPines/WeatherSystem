@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  producer:
+    build: .
+    command: uvicorn producer:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - rabbitmq
+
+  consumer:
+    build: .
+    command: uvicorn consumer:app --host 0.0.0.0 --port 8001
+    ports:
+      - "8001:8001"
+    depends_on:
+      - rabbitmq
